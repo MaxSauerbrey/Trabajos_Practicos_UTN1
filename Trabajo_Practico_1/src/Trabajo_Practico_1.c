@@ -48,7 +48,7 @@ int main(void)
 		{
 		case 1:
 			 variable1 = Pedir_Float("\nIngrese el primer operando:","Error, reingrese un numero:");
-			 flagVariable1++;
+			 flagVariable1=1;
 			 break;
 		case 2:
 			//Validacion opciones.
@@ -58,7 +58,7 @@ int main(void)
 				break;
 			}
 			variable2 = Pedir_Float("\nIngrese el segundo operando:","Error, reingrese un numero:");
-			flagVariable2++;
+			flagVariable2=1;
 			break;
 		case 3:
 			resultadoValidacionFlags=Valida_AccesoCalculos(flagVariable1,flagVariable2,"\nERROR. Primero debe ingresar ambos operandos (opcion 1-opcion2).","\nERROR. Debe ingresar el segundo operando (opcion 2).");
@@ -74,7 +74,7 @@ int main(void)
 			resultadoMultiplicacion=MultiplicarDosNumeros(variable1, variable2);
 			resultadoFactorial1=FactorearNumero(variable1);
 			resultadoFactorial2=FactorearNumero(variable2);
-			flagVariable3++;
+			flagVariable3=1;
 			break;
 		case 4:
 			//Validacion opciones.
@@ -84,6 +84,7 @@ int main(void)
 				break;
 			}
 			MuestraInformesResultados(variable1, variable2, resultadoSuma, resultadoResta, resultadoDivision, resultadoMultiplicacion, resultadoFactorial1, resultadoFactorial2);
+			flagVariable3=0;
 			break;
 		}
 	}while(opciones !=5);

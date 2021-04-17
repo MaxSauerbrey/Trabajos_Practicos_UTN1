@@ -1,10 +1,5 @@
-23:15:05 **** Incremental Build of configuration Debug for project Trabajo_Practico_1 ****
+02:15:26 **** Incremental Build of configuration Debug for project Trabajo_Practico_1 ****
 make all 
-Building file: ../src/Tp1.c
-Invoking: GCC C Compiler
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Tp1.d" -MT"src/Tp1.o" -o "src/Tp1.o" "../src/Tp1.c"
-Finished building: ../src/Tp1.c
- 
 Building file: ../src/Trabajo_Practico_1.c
 Invoking: GCC C Compiler
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Trabajo_Practico_1.d" -MT"src/Trabajo_Practico_1.o" -o "src/Trabajo_Practico_1.o" "../src/Trabajo_Practico_1.c"
@@ -15,3 +10,6 @@ Invoking: GCC C Linker
 gcc  -o "Trabajo_Practico_1"  ./src/Tp1.o ./src/Trabajo_Practico_1.o   
 Finished building target: Trabajo_Practico_1
  
+02:15:28 **** Incremental Build of configuration Debug for project Trabajo_Practico_1 ****
+make all 
+make: No se hace nada para 'all'.
