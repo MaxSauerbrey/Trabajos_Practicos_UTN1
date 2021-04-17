@@ -1,0 +1,38 @@
+/*
+ * Tp1.h
+ *
+ *  Created on: 13 abr. 2021
+ *      Author: maxdev
+ */
+
+#ifndef TP1_H_
+#define TP1_H_
+
+#include <stdio_ext.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#define LEN_BUFFER 1000
+
+int   Get_Int(char texto[], char error[], int minimo, int maximo);
+float Get_Float (char texto[], char error[], int minimo, int maximo);
+float SumarDosNumeros (float numero1, float numero2);
+float RestarDosNumeros (float numero1, float numero2);
+float MultiplicarDosNumeros (float numero1, float numero2);
+float DividirDosNumeros (float numero1, float numero2);
+int DefineFlotante(float numero1);
+unsigned long int FactorearNumero (float numeroIngresado);
+void MenuCalcular(float variable1, float variable2, int flag1,int flag2, char msj[], char operando);
+void MostrarFactorial (float var1,float var2,unsigned long int resultado1, unsigned long int resultado2);
+
+
+//---------------------------------------
+int ValidarUnNumeroEntero(char buffer[]);
+int ValidarUnNumeroFlotante(char buffer[]);
+
+int Pedir_Entero (char msj[], char msjError[]);
+int Pedir_Entero_Rango (char msj[], char msjError[], int min, int max, char errorRango[]);
+float Pedir_Float (char msj[], char msjError[]);
+float Pedir_Float_Rango (char msj[], char msjError[], int min, int max, char errorRango[]);
+
+#endif /* TP1_H_ */

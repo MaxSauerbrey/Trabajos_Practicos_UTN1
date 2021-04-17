@@ -1,0 +1,166 @@
+/*
+ ============================================================================
+ Name        : Trabajo_Practico_1.c
+  Author      :
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio_ext.h>
+#include "Tp1.h"
+
+int main(void)
+{
+	int opciones;
+	int flagVariable1;
+	int flagVariable2;
+	int flagVariable3;
+	float variable1;
+	float variable2;
+	float resultadoSuma;
+	float resultadoResta;
+	float resultadoDivision;
+	float resultadoMultiplicacion;
+	long long int resultadoFactorial1;
+	long long int resultadoFactorial2;
+	flagVariable1=0;
+	flagVariable2=0;
+	flagVariable3=0;
+
+	printf("\n         ----------\n");
+	printf("----------------------------\n");
+	printf("¡Bienvenidos a la calculadora!\n");
+	printf("----------------------------\n");
+	printf("         ----------\n");
+
+	do
+	{
+		printf("\nMenu principal.\n");
+		//Primera variable.
+		if(flagVariable1==0)
+		{
+			printf("\n1.Ingrese el primer operando (A=x).\n");
+		}
+		else
+		{
+			printf("1.El primer operando ingresado es: (A = %.2f)\n",variable1);
+		}
+
+		//Segunda variable.
+		if(flagVariable2==0)
+		{
+			printf("2.Ingrese el segundo operando (B=y).\n");
+		}
+		else
+		{
+			printf("2.El segundo operando ingresado es: (B = %.2f)\n",variable2);
+		}
+		//Calcular todas las operaciones
+		printf("3.Calcular todas las operaciones.\n");
+		MenuCalcular(variable1, variable2, flagVariable1, flagVariable2,"a)Calcular la suma",'+');
+		MenuCalcular(variable1, variable2, flagVariable1, flagVariable2,"b)Calcular la resta",'-');
+		MenuCalcular(variable1, variable2, flagVariable1, flagVariable2,"c)Calcular la division",'/');
+		MenuCalcular(variable1, variable2, flagVariable1, flagVariable2,"d)Calcular la multiplicacion",'*');
+		MenuCalcular(variable1, variable2, flagVariable1, flagVariable2,"e)Calcular el Factorial",'&');
+		//Mostrar resultados
+		printf("4.Informe de resultados.\n");
+		printf("5.Salir.\n");
+
+		opciones= Pedir_Entero_Rango("\nIngrese una opcion (1-5): ","ERROR. Reingrese solamente un numero (1-5):",1,5,"Error de rango. Reingrese");
+
+		switch(opciones)
+		{
+		case 1:
+			 //system("clear");
+			 variable1 = Pedir_Float("\nIngrese el primer operando:","Error, reingrese un numero:");
+			 flagVariable1++;
+			 break;
+		case 2:
+			if(flagVariable1==0)
+			{
+				printf("ERROR.Debe ingresar el primer operando (opcion 1).\n");
+				break;
+			}
+			variable2 = Pedir_Float("\nIngrese el segundo operando:","Error, reingrese un numero:");
+			flagVariable2++;
+			break;
+		case 3:
+			if(flagVariable1==0 && flagVariable2==0)
+			{
+				printf("\nERROR. Primero debe ingresar ambos operandos (opcion 1-opcion2).");
+				break;
+			}
+			else
+			{
+				if(flagVariable1==0)
+				{
+					printf("\nERROR. Debe ingresar el primer operando (opcion 1).");
+					break;
+				}
+				if(flagVariable2==0)
+				{
+					printf("\nERROR. Debe ingresar el primer segundo operando (opcion 2).");
+					break;
+				}
+			}
+			printf("Todas las operaciones han sido calculadas.\n");
+			//Llamo a todas las funciones.
+			resultadoSuma=SumarDosNumeros(variable1,variable2);
+			resultadoResta=RestarDosNumeros(variable1,variable2);
+			resultadoDivision=DividirDosNumeros(variable1, variable2);
+			resultadoMultiplicacion=MultiplicarDosNumeros(variable1, variable2);
+			resultadoFactorial1=FactorearNumero(variable1);
+			resultadoFactorial2=FactorearNumero(variable2);
+			flagVariable3++;
+			break;
+		case 4:
+			if(flagVariable1==0 && flagVariable2==0)
+			{
+				printf("\nERROR. Primero debe ingresar ambos operandos (opcion 1-opcion2).");
+				break;
+			}
+			else
+			{
+				if(flagVariable1>0 && flagVariable2 ==0)
+				{
+					printf("\nERROR. Debe ingresar el segundo operando (opcion2).");
+					break;
+				}
+				if(flagVariable3 ==0)
+				{
+					printf("\nERROR. Se debe calcular todas las operaciones antes de mostrar los resultados (opcion 3).");
+					break;
+				}
+			}
+			//Muestra Suma
+			printf("El resultado de %.2f + %.2f es: %.2f.\n",variable1,variable2,resultadoSuma);
+			//Muestra Resta
+			printf("El resultado de %.2f - %.2f es: %.2f.\n",variable1,variable2,resultadoResta);
+			//Muestra Division
+			if(variable2!=0)
+			{
+				printf("El resultado de %.2f / %.2f es: %.2f.\n",variable1,variable2,resultadoDivision);
+			}
+			else
+			{
+				printf("La division por cero no esta definida.\n");
+			}
+			//Muestra multiplicacion
+			printf("El resultado de %.2f * %.2f es: %.2f.\n",variable1,variable2,resultadoMultiplicacion);
+			//Muestra Factorial
+			MostrarFactorial(variable1,variable2,resultadoFactorial1,resultadoFactorial2);
+			break;
+		}
+	}while(opciones !=5);
+
+	return EXIT_SUCCESS;
+}
+
+
+
+
+
+
+

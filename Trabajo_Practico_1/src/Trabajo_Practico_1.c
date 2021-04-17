@@ -9,248 +9,86 @@
  */
 
 #include <stdio_ext.h>
-#include <stdlib.h>
-
-int   Get_Int(char texto[], char error[], int minimo, int maximo);
-float Get_Float (char texto[], char error[], int minimo, int maximo);
-float SumarDosNumeros (float numero1, float numero2);
-float RestarDosNumeros (float numero1, float numero2);
-float MultiplicarDosNumeros (float numero1, float numero2);
-float DividirDosNumeros (float numero1, float numero2);
-
+#include "Tp1.h"
 
 int main(void)
 {
+	//Declaracion de variables.
 	int opciones;
 	int flagVariable1;
 	int flagVariable2;
-	int flagMenu;
+	int flagVariable3;
 	float variable1;
 	float variable2;
 	float resultadoSuma;
 	float resultadoResta;
 	float resultadoDivision;
 	float resultadoMultiplicacion;
-	//long int resultadoFactorial1;
-	//long int resultadoFactorial2;
+	long long int resultadoFactorial1;
+	long long int resultadoFactorial2;
+	int resultadoValidacionFlags;
+	int resultadoValidacionFlags2;
+	//Asignacion flags.
 	flagVariable1=0;
 	flagVariable2=0;
+	flagVariable3=0;
+
+	printf("\n         ----------\n");
+	printf("----------------------------\n");
+	printf("¡Bienvenidos a la calculadora!\n");
+	printf("----------------------------\n");
+	printf("         ----------\n");
 
 	do
 	{
-		if(flagMenu==0)
-		{
-		printf("\n         ----------\n");
-		printf("----------------------------\n");
-
-		printf("¡Bienvenidos a la calculadora!\n");
-
-		printf("----------------------------\n");
-		printf("         ----------\n");
-		}
-
-		printf("\n Menu principal.\n");
-		//Primera variable.
-		if(flagVariable1==0)
-		{
-			printf("\n1.Ingrese el primer operando (A=x).\n");
-		}
-		else
-		{
-			printf("1.El primer operando ingresado es: (A = %.2f)\n",variable1);
-
-		}
-
-		//Segunda variable.
-
-		if(flagVariable2==0)
-		{
-			printf("2.Ingrese el segundo operando (B=y).\n");
-		}
-		else
-		{
-			printf("2.El segundo operando ingresado es: (B = %.2f)\n",variable2);
-		}
-
-		printf("3.Calcular todas las operaciones.\n");
-			//printf("	a)Calcular la suma (A+B).\n");
-			//printf("	b)Calcular la resta (A-B).\n");
-			//printf("	c)Calcular la division (A/B).\n");
-			//printf("	d)Calcular la multiplicacion(A/B).\n");
-			//printf("	e)Calcular el factorial (A!).\n");
-		printf("4.Informe de resultados.\n");
-			//printf("	a)El resultado de A+B es:r.\n");
-			//printf("	b)El resultado de A-B es:r.\n");
-			//printf("	c)El resultado de A/B es:r. o No es posible dividir por cero.\n");
-			//printf("	d)El resultado de A*B es:r.\n");
-			//printf("	e)El factorial de A es: r1 y el factorial de B es r2.\n");
-		printf("5.Salir.\n");
-
-		opciones= Get_Int("\nIngrese una opcion (1-5): ","ERROR. Reingrese una opcion (1-5):",1,5);
-
-		//printf("\nIngrese una opcion: ");
-		//scanf("%d",&opciones);
-
-		//pedir entero
+		MuestraMenu(flagVariable1, flagVariable2, variable1, variable2);
+		opciones= Pedir_Entero_Rango("\nIngrese una opcion (1-5): ","ERROR. Reingrese solamente un numero (1-5):",1,5,"Error de rango. Reingrese");
 
 		switch(opciones)
 		{
 		case 1:
-			 //system("clear");
-			 variable1 = Get_Float ("Ingrese el primer operando:","Error, reingrese el numero", -10000, 10000);
+			 variable1 = Pedir_Float("\nIngrese el primer operando:","Error, reingrese un numero:");
 			 flagVariable1++;
-			 printf("La variable cargada %.2f\n", variable1);
-			 //funcion asignacion primer operando.
-			//Ingresar primer numero
-			 flagMenu++;
 			 break;
 		case 2:
-			flagMenu++;
+			//Validacion opciones.
 			if(flagVariable1==0)
 			{
 				printf("ERROR.Debe ingresar el primer operando (opcion 1).\n");
 				break;
 			}
-			variable2 = Get_Float("Ingrese el segundo operando:","Error, reingrese el numero", -10000, 10000);
+			variable2 = Pedir_Float("\nIngrese el segundo operando:","Error, reingrese un numero:");
 			flagVariable2++;
-			//printf("Caso2.\n");
-			//funcion asignacion primer operando.
-			//Ingresar primer numero
 			break;
 		case 3:
-			flagMenu++;
-			if(flagVariable1==0 && flagVariable2==0)
+			resultadoValidacionFlags=Valida_AccesoCalculos(flagVariable1,flagVariable2,"\nERROR. Primero debe ingresar ambos operandos (opcion 1-opcion2).","\nERROR. Debe ingresar el segundo operando (opcion 2).");
+			if(resultadoValidacionFlags==0)
 			{
-				printf("\nERROR. Primero debe ingresar ambos operandos (opcion 1-opcion2).");
 				break;
 			}
-			else
-			{
-				if(flagVariable1==0)
-				{
-					printf("\nERROR. Debe ingresar el primer operando (opcion 1).");
-					break;
-				}
-				if(flagVariable2==0)
-				{
-					printf("\nERROR. Debe ingresar el primer segundo operando (opcion 2).");
-					break;
-				}
-			}
-
 			printf("Todas las operaciones han sido calculadas.\n");
-			//Llamar a todas las funciones
+			//Llamada a todas las funciones que realizan operaciones.
 			resultadoSuma=SumarDosNumeros(variable1,variable2);
 			resultadoResta=RestarDosNumeros(variable1,variable2);
 			resultadoDivision=DividirDosNumeros(variable1, variable2);
 			resultadoMultiplicacion=MultiplicarDosNumeros(variable1, variable2);
-			//resultadoFactorial1
-			//resultadoFactorial1
+			resultadoFactorial1=FactorearNumero(variable1);
+			resultadoFactorial2=FactorearNumero(variable2);
+			flagVariable3++;
 			break;
 		case 4:
-			if(flagVariable1==0 && flagVariable2==0)
+			//Validacion opciones.
+			resultadoValidacionFlags2=Valida_AccesoInforme(flagVariable1, flagVariable2, flagVariable3,"\nERROR. Primero debe ingresar ambos operandos (opcion 1-opcion2), y despues calcular (opcion3).","\nERROR. Debe ingresar el segundo operando (opcion2), y despues calcular (opcion3).","\nERROR. Se debe calcular todas las operaciones antes de mostrar los resultados (opcion 3).");
+			if(resultadoValidacionFlags2==0)
 			{
-				printf("\nERROR. Primero debe ingresar ambos operandos (opcion 1-opcion2).");
 				break;
 			}
-			else
-			{
-				//if()
-			}
-			printf("El resultado de %.2f + %.2f es: %.2f.\n",variable1,variable2,resultadoSuma);
-			printf("El resultado de %.2f - %.2f es: %.2f.\n",variable1,variable2,resultadoResta);
-			if(variable2!=0)
-			{
-				printf("El resultado de %.2f / %.2f es: %.2f.\n",variable1,variable2,resultadoDivision);
-			}
-			else
-			{
-				printf("La division por cero no esta definida.\n");
-			}
-			printf("El resultado de %.2f * %.2f es: %.2f.\n",variable1,variable2,resultadoMultiplicacion);
-			//printf("El resultado de %.2f + %.2f es: %.2f.\n",variable1,variable2,resultadoFactorial1);
-			//printf("El resultado de %.2f + %.2f es: %.2f.\n",variable1,variable2,resultadoFactorial2);
+			MuestraInformesResultados(variable1, variable2, resultadoSuma, resultadoResta, resultadoDivision, resultadoMultiplicacion, resultadoFactorial1, resultadoFactorial2);
 			break;
-			flagMenu++;
 		}
-
-
-
-
 	}while(opciones !=5);
-
-
-
+	printf("Ha salido exitosamente de la calculadora.");
 	return EXIT_SUCCESS;
 }
 
-int Get_Int (char texto[], char error[], int minimo, int maximo)
-{
-	int numeroIngresado;
-	printf("%s",texto);
-	scanf("%d",&numeroIngresado);
 
-	while(numeroIngresado<minimo || numeroIngresado>maximo)
-	{
-		printf("%s",error);
-		scanf("%d",&numeroIngresado);
-	}
-
-	return numeroIngresado;
-}
-
-float Get_Float (char texto[], char error[], int minimo, int maximo)
-{
-	float numeroIngresado;
-	//float resultado;
-
-	printf("%s",texto);
-	scanf("%f",&numeroIngresado);
-
-	while(numeroIngresado<minimo || numeroIngresado>maximo)
-	{
-		printf("%s",error);
-		scanf("%f",&numeroIngresado);
-	}
-
-	return numeroIngresado;
-
-}
-
-float SumarDosNumeros (float numero1, float numero2)
-{
-	float resultado;
-
-	resultado = numero1+numero2;
-
-	return resultado;
-}
-
-float RestarDosNumeros (float numero1, float numero2)
-{
-	float resultado;
-
-	resultado= numero1-numero2;
-
-	return resultado;
-}
-
-float MultiplicarDosNumeros (float numero1, float numero2)
-{
-	float resultado;
-
-	resultado= numero1*numero2;
-
-	return resultado;
-
-}
-
-float DividirDosNumeros (float numero1, float numero2)
-{
-	float resultado;
-
-	resultado =numero1/numero2;
-
-	return resultado;
-
-}
